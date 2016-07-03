@@ -150,6 +150,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Database\Beer.cs" />
+    <Compile Include="Database\BeerCraftDbContext.cs" />
+    <Compile Include="Database\Craft.cs" />
+    <Compile Include="Migrations\20160703211004_DatabaseCreation.cs" />
+    <Compile Include="Migrations\20160703211004_DatabaseCreation.designer.cs">
+      <DependentUpon>20160703211004_DatabaseCreation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\BeerCraftDbContextModelSnapshot.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
