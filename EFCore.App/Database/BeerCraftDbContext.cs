@@ -12,9 +12,13 @@ namespace EFCore.App.Database
             optionsBuilder.UseSqlServer(@"Data Source=localhost;Initial Catalog=EFCore.Cmd.NewDb;User id=sa;Password=password;");
         }
 
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Craft>().Property(craft => craft.Name).IsRequired();
         }
     }
 }
