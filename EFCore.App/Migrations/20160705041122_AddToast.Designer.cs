@@ -8,9 +8,10 @@ using EFCore.App.Database;
 namespace EFCore.App.Migrations
 {
     [DbContext(typeof(BeerCraftDbContext))]
-    partial class BeerCraftDbContextModelSnapshot : ModelSnapshot
+    [Migration("20160705041122_AddToast")]
+    partial class AddToast
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")

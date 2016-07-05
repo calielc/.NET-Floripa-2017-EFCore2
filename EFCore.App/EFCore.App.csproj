@@ -153,6 +153,7 @@
     <Compile Include="Database\Beer.cs" />
     <Compile Include="Database\BeerCraftDbContext.cs" />
     <Compile Include="Database\Craft.cs" />
+    <Compile Include="Database\Toast.cs" />
     <Compile Include="Migrations\20160703211004_DatabaseCreation.cs" />
     <Compile Include="Migrations\20160703211004_DatabaseCreation.designer.cs">
       <DependentUpon>20160703211004_DatabaseCreation.cs</DependentUpon>
@@ -160,6 +161,10 @@
     <Compile Include="Migrations\20160705040438_AddLogo.cs" />
     <Compile Include="Migrations\20160705040438_AddLogo.designer.cs">
       <DependentUpon>20160705040438_AddLogo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20160705041122_AddToast.cs" />
+    <Compile Include="Migrations\20160705041122_AddToast.designer.cs">
+      <DependentUpon>20160705041122_AddToast.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\BeerCraftDbContextModelSnapshot.cs" />
     <Compile Include="Program.cs" />

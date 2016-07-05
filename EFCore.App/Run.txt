@@ -2,3 +2,9 @@
 Install-Package Microsoft.EntityFrameworkCore.Tools –Pre
 
 Add-Migration DatabaseCreation
+
+Update-Database
+Update-Database -Migration DatabaseCreation
+
+Remove-Migration
+Remove-Migration -force

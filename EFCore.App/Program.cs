@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EFCore.App.Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace EFCore.App
 {
@@ -11,8 +12,31 @@ namespace EFCore.App
     {
         static void Main(string[] args)
         {
-            InsertSchornstein();
-            InsertBrooklyn();
+            //InsertSchornstein();
+            //InsertBrooklyn();
+
+            SaveToast();
+        }
+
+        private static void SaveToast()
+        {
+            using (var context = new BeerCraftDbContext())
+            {
+                var beer = context.Beers
+                    .Include(x => x.Craft)
+                    .Single(x => x.Name == "Weiss" && x.Craft.Name == "Cervejaria Schornstein");
+
+                var toast = new Toast
+                {
+                    Beer = beer,
+                    Nota = 4,
+                    Description = "Acompanha um bom frango",
+                    DateTime = DateTime.UtcNow,
+                };
+                context.Add(toast);
+
+                context.SaveChanges();
+            }
         }
 
         private static void InsertBrooklyn()
