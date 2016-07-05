@@ -18,7 +18,7 @@ namespace EFCore.App.Database
 
             modelBuilder.Entity<Craft>().Property(craft => craft.Name).IsRequired();
 
-            modelBuilder.Entity<Toast>().Property(x => x.DateTime).ValueGeneratedOnAdd().IsRequired();
+            modelBuilder.Entity<Toast>().Property(x => x.DateTime).IsRequired();
         }
     }
 }

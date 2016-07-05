@@ -15,7 +15,41 @@ namespace EFCore.App
             //InsertSchornstein();
             //InsertBrooklyn();
 
-            SaveToast();
+            //SaveToast();
+            SaveToastComTransacao();
+        }
+
+        private static void SaveToastComTransacao()
+        {
+            using (var context = new BeerCraftDbContext())
+            {
+                using (var transaction = context.Database.BeginTransaction())
+                {
+                    var beer = context.Beers.Single(x => x.Name == "Brooklyn Lager");
+
+                    var toast = new Toast
+                    {
+                        Beer = beer,
+                        Nota = 2,
+                        Description = "Errei",
+                        DateTime = DateTime.UtcNow,
+                    };
+                    context.Add(toast);
+
+                    context.SaveChanges();
+
+                    transaction.Rollback();
+                }
+            }
+
+            using (var context = new BeerCraftDbContext())
+            {
+                var toasts = context.Set<Toast>().Include(toast => toast.Beer).ThenInclude(beer => beer.Craft).ToArray();
+                foreach (var toast in toasts)
+                {
+                    Console.WriteLine($"{toast.Beer?.Craft?.Name} - {toast.Beer?.Name} - {toast.Nota}");
+                }
+            }
         }
 
         private static void SaveToast()
@@ -38,6 +72,7 @@ namespace EFCore.App
                 context.SaveChanges();
             }
         }
+
 
         private static void InsertBrooklyn()
         {
