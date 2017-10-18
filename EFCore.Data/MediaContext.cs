@@ -12,7 +12,11 @@ namespace EFCore.Data {
         public DbSet<Photo> Photos { get; set; }
         public DbSet<Video> Videos { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) { }
+        [DbFunction("[dbo].[NumberOfPhotosInCity]")]
+        public static int NumberOfPhotosInCity(string city) { return 0; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             base.OnModelCreating(modelBuilder);

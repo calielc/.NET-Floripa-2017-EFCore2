@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using EFCore.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Linq;
 
 namespace EFCore.Web.Controllers {
     [Route("photos")]
@@ -21,5 +22,13 @@ namespace EFCore.Web.Controllers {
         public IEnumerable<Photo> List() {
             return _query(_context);
         }
+
+        [HttpGet, Route("MostUsed")]
+        public IEnumerable<Photo> MostUsed() {
+            var photos = _context.Photos.Where(photo => MediaContext.NumberOfPhotosInCity(photo.Geolocation.City) > 1);
+
+            return photos.ToArray();
+        }
     }
+
 }
