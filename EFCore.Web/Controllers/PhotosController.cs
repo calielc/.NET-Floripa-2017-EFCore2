@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using EFCore.Data;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace EFCore.Web.Controllers {
     [Route("photos")]
@@ -13,9 +13,13 @@ namespace EFCore.Web.Controllers {
             _context = context;
         }
 
+        private Func<MediaContext, IEnumerable<Photo>> _query = EF.CompileQuery((MediaContext db)
+            => db.Photos.Include(c => c.Photographer)
+        );
+
         [HttpGet]
         public IEnumerable<Photo> List() {
-            return _context.Photos.Include(x => x.Photographer).ToArray();
+            return _query(_context);
         }
     }
 }
