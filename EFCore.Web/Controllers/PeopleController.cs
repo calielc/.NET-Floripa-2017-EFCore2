@@ -10,11 +10,16 @@ namespace EFCore.Web.Controllers {
     [Route("peoples")]
     public class PeoplesController : Controller {
         [HttpGet]
-        public IEnumerable<People> List() {
+        public IEnumerable<People> List(string name) {
             using (var context = new MediaContext()) {
-                return context.Peoples.ToArray();
+                var peoples = context.Peoples;
+                if (name == null) {
+                    return peoples.ToArray();
+                }
+                return peoples.Where(x => EF.Functions.Like(x.Name, $"%{name}%")).ToArray();
             }
         }
+
         [HttpGet, Route("includeDeleted")]
         public IEnumerable<People> ListIncludeDeleted() {
             using (var context = new MediaContext()) {
