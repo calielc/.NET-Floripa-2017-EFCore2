@@ -7,6 +7,6 @@
 
         public People Photographer { get; set; }
 
-        public Geolocation Geolocation { get; set; }
+        public PhotoGeolocation Geolocation { get; set; }
     }
 }

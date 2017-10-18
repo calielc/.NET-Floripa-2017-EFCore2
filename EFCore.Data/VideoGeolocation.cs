@@ -1,5 +1,6 @@
 ﻿namespace EFCore.Data {
-    public class Geolocation {
+
+    public class VideoGeolocation {
         public decimal? Lat { get; set; }
         public decimal? Long { get; set; }
 
