@@ -1,5 +1,6 @@
-﻿using JetBrains.Annotations;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
 
 namespace EFCore.Data {
 
@@ -16,11 +17,17 @@ namespace EFCore.Data {
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<People>().HasQueryFilter(x => x.DeletedAt == null);
+            modelBuilder.ApplyConfiguration(new PeopleConfiguration());
 
             modelBuilder.Entity<Photo>().OwnsOne(x => x.Geolocation);
 
             modelBuilder.Entity<Video>().OwnsOne(x => x.Geolocation).ToTable("VideoGeolocations");
+        }
+    }
+
+    class PeopleConfiguration : IEntityTypeConfiguration<People> {
+        public void Configure(EntityTypeBuilder<People> builder) {
+            builder.HasQueryFilter(x => x.DeletedAt == null);
         }
     }
 }
