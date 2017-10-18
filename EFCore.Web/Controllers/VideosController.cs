@@ -20,8 +20,8 @@ namespace EFCore.Web.Controllers {
         }
 
         [HttpGet, Route("duration")]
-        public IEnumerable<Video> ListWith(TimeSpan greather) {
-            return _context.Videos.FromSql($"select * from Videos where duration > {greather}").ToArray();
+        public IEnumerable<Video> ListWith(TimeSpan greater) {
+            return _context.Videos.FromSql($"select * from Videos where duration > {greater}").ToArray();
         }
 
     }
