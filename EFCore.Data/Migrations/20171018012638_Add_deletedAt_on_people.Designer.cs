@@ -11,9 +11,10 @@ using System;
 namespace EFCore.Data.Migrations
 {
     [DbContext(typeof(MediaContext))]
-    partial class MediaContextModelSnapshot : ModelSnapshot
+    [Migration("20171018012638_Add_deletedAt_on_people")]
+    partial class Add_deletedAt_on_people
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

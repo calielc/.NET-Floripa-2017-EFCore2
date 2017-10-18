@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace EFCore.Data {
     public class People {
@@ -6,6 +7,8 @@ namespace EFCore.Data {
 
         [Required]
         public string Name { get; set; }
+
+        public DateTime? DeletedAt { get; set; }
 
     }
 }
