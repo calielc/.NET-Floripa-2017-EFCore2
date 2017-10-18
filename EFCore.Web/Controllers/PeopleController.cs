@@ -9,22 +9,24 @@ using Microsoft.EntityFrameworkCore;
 namespace EFCore.Web.Controllers {
     [Route("peoples")]
     public class PeoplesController : Controller {
+        private readonly MediaContext _context;
+
+        public PeoplesController(MediaContext context) {
+            _context = context;
+        }
+
         [HttpGet]
         public IEnumerable<People> List(string name) {
-            using (var context = new MediaContext()) {
-                var peoples = context.Peoples;
-                if (name == null) {
-                    return peoples.ToArray();
-                }
-                return peoples.Where(x => EF.Functions.Like(x.Name, $"%{name}%")).ToArray();
+            var peoples = _context.Peoples;
+            if (name == null) {
+                return peoples.ToArray();
             }
+            return peoples.Where(x => EF.Functions.Like(x.Name, $"%{name}%")).ToArray();
         }
 
         [HttpGet, Route("includeDeleted")]
         public IEnumerable<People> ListIncludeDeleted() {
-            using (var context = new MediaContext()) {
-                return context.Peoples.IgnoreQueryFilters().ToArray();
-            }
+            return _context.Peoples.IgnoreQueryFilters().ToArray();
         }
     }
 }
